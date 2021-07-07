@@ -1,16 +1,16 @@
-import * as assert from 'assert'
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
-import * as fs from 'fs'
 import * as io from '@actions/io'
+import * as assert from 'assert'
+import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
-import * as regexpHelper from './regexp-helper'
-import * as stateHelper from './state-helper'
-import * as urlHelper from './url-helper'
 import {default as uuid} from 'uuid/v4'
 import {IGitCommandManager} from './git-command-manager'
 import {IGitSourceSettings} from './git-source-settings'
+import * as regexpHelper from './regexp-helper'
+import * as stateHelper from './state-helper'
+import * as urlHelper from './url-helper'
 
 const IS_WINDOWS = process.platform === 'win32'
 const SSH_COMMAND_KEY = 'core.sshCommand'
@@ -200,7 +200,7 @@ class GitAuthHelper {
     if (IS_WINDOWS) {
       const icacls = await io.which('icacls.exe')
       await exec.exec(
-        `"${icacls}" "${this.sshKeyPath}" /grant:r "${process.env['USERDOMAIN']}\\${process.env['USERNAME']}:F"`
+        `"${icacls}" "${this.sshKeyPath}" /grant:r "${process.env['USERNAME']}:F"`
       )
       await exec.exec(`"${icacls}" "${this.sshKeyPath}" /inheritance:r`)
     }
